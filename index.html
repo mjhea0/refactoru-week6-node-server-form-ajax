@@ -1,0 +1,44 @@
+<html>
+<head>
+  <title>Contact Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.css" rel="stylesheet" media="screen">
+  <style>
+    body {padding-top: 50px;}
+    .container {max-width: 400px;}
+  </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Fill this form out</h1>
+    <br>
+    <form method="post" action="yo">
+      <div class="form-group">
+        <input class="form-control" type="text" name="name" placeholder="Enter your name">
+        <input type="hidden" name="_method" value="post">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    </div>
+    <script type="text/javascript">
+      Use this submit handler for all forms in document
+      $(document).on('submit', 'form', function(e) {
+        // Form being submitted
+        var form = e.currentTarget;
+        // Issue an ajax request
+        $.ajax({
+          url: form.action,          // the forms 'action' attribute
+          type: 'POST',               // use 'PUT' (not supported in all browsers)
+                                     // Alt. the 'method' attribute (form.method)
+          data: $(form).serialize(), // Serialize the form's fields and values
+          success: function() {},
+          error: function() {}
+        });
+        // Prevent the browser from submitting the form
+        e.preventDefault();
+      // });
+    </script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
