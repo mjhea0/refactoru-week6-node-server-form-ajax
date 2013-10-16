@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>JQuery AJAX with Nodejs</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <style type="text/css">
+    body {padding-top: 20px;}
+    .container {max-width: 400px;}
+  </style>
+</head>
+<body>
+  <script>
+    $(function() {
+      $("#callAjax").click(function() {
+        var theMessage = $.trim($("#theMessage").val());
+
+        if(theMessage.length > 0)
+          {
+          $.ajax({
+              type: "POST",
+              url: "http://localhost:8080/echo/",
+              contentType: "application/json",
+              data: JSON.stringify({
+                  message: theMessage
+              }),
+              dataType: "text",
+              success: function( data ){
+                  var returnedJsonObj = JSON.parse(data);
+                  $("#echoResult").html("You said: " + returnedJsonObj.echoMessage);
+              },
+              error: function( err ){
+                  $("#echoResult").html("Error: " + err);
+              }
+          });
+          }
+      }); 
+    });
+  </script>
+  <div class="container">
+    <strong>Echo Message:</strong>
+    <input type="text" id="theMessage" name="theMessage" value="" />
+    <input id="callAjax" type="button" value="Call Ajax" />
+    <div id="echoResult"></div>
+  <div>
+</body>
+</html>
